@@ -4,21 +4,9 @@ declare void @putint(i32)
 declare void @putch(i32)
 declare void @putstr(i8*)
 
-@vN = dso_local constant i32 10
-@va = dso_local global [10 x i32] [i32 0, i32 1, i32 2, i32 3, i32 4, i32 5, i32 6, i32 7, i32 8, i32 9]
-
-define dso_local i32 @fib(i32 %v0) {
-    %v2 = alloca i32
-    store i32 %v0, i32* %v2 
-    %v3 = load i32, i32* %v2
-    %v4 = add nsw i32 %v3, 1
-    ret i32 %v4
-}
 
 define dso_local i32 @main() {
-    %v1 = load i32, i32* @vN
-    %v2 = call i32 @fib(i32 %v1)
-    call void @putint(i32 %v2)
+    call void @putint(i32 0)
     ret i32 0
 }
 
