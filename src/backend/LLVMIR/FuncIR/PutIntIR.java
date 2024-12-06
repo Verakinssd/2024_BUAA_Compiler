@@ -18,7 +18,11 @@ public class PutIntIR extends InstructionIR {
 
     public void generateMipsCode(FuncIR funcIR) {
         funcIR.addInstructionAsm(new CommentAsm(this.toString()));
-        getRegister(funcIR, regIR.reg, regIR.isGlobal , A0);
+        if (regIR.type == 2) {
+            getRegister(funcIR, regIR.reg, regIR.isGlobal, A0);
+        } else{
+            getRegister(funcIR, regIR.value, A0);
+        }
         funcIR.addInstructionAsm(new LiAsm(V0, 1));
         funcIR.addInstructionAsm(new SyscallAsm());
     }

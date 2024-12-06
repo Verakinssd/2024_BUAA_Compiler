@@ -50,16 +50,26 @@ public class CallIR extends InstructionIR{
         funcIR.addInstructionAsm(new MemoryAsm(SW, SP, SP, allocate(4)));
         funcIR.addInstructionAsm(new MemoryAsm(SW, RA, SP, allocate(4)));
         Integer offset = AsmBuilder.offset;
+
+//        for (String reg : offsetMap.keySet()) {
+//            System.out.println(reg + " " + offsetMap.get(reg));
+//        }
+//
+//        for (RegIR regIR : regIRs) {
+//            System.out.println(regIR.reg);
+//        }
+
         for (RegIR regIR : regIRs) {
             if (regIR.type == 1) {
                 funcIR.addInstructionAsm(new LiAsm(T0, regIR.value));
                 funcIR.addInstructionAsm(new MemoryAsm(SW ,T0, SP, allocate(4)));
             } else {
-                Integer offset1 = offsetMap.get(reg);
+                Integer offset1 = offsetMap.get(regIR.reg);
+//                System.out.println("offset = " + offset1);
                 if (offset1 == null) {
-                    push(reg, 4);
+                    push(regIR.reg, 4);
                 } else {
-                    if (type == 1) {
+                    if (regIR.type == 2) {
                         getRegister(funcIR, regIR.reg, false, T0);
                     } else {
                         getRegister(funcIR, regIR.value, T0);

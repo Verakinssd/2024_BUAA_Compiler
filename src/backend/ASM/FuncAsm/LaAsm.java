@@ -2,6 +2,8 @@ package backend.ASM.FuncAsm;
 
 import backend.ASM.Register;
 
+import static backend.ASM.AsmOP.LA;
+
 public class LaAsm extends InstructionAsm {
     public Register register;
     public String name;
@@ -12,6 +14,6 @@ public class LaAsm extends InstructionAsm {
     }
 
     public String toString() {
-        return "    la " + register + " " + name +"\n";
+        return "    " + LA + " " + register + " " + name.substring(1) +"\n";
     }
 }

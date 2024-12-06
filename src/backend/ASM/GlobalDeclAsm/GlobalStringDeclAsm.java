@@ -59,7 +59,7 @@ public class GlobalStringDeclAsm extends GlobalDeclAsm {
 
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        sb.append("    ").append(reg);
+        sb.append("    ").append(reg.substring(1));
         sb.append(":  .asciiz \"");
         sb.append(getMipsString(str));
         sb.append("\"\n");

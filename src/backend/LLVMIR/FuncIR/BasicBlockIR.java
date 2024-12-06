@@ -10,7 +10,6 @@ public class BasicBlockIR extends InstructionIR {
     }
 
     public void generateMipsCode(FuncIR funcIR) {
-        funcIR.addInstructionAsm(new CommentAsm(this.toString()));
         funcIR.addInstructionAsm(new LabelAsm(funcIR.ident + "_" + name.substring(1)));
     }
 

@@ -7,10 +7,10 @@ import backend.ASM.Register;
 import backend.LLVMIR.RegType;
 
 import static backend.ASM.AsmBuilder.push;
-import static backend.ASM.AsmOP.LW;
-import static backend.ASM.AsmOP.SW;
+import static backend.ASM.AsmOP.*;
 import static backend.ASM.Register.SP;
 import static backend.ASM.Register.T0;
+import static backend.LLVMIR.RegType.I8_PTR;
 
 public class LoadIR extends InstructionIR {
     public RegType regType1;
@@ -30,8 +30,13 @@ public class LoadIR extends InstructionIR {
     public void generateMipsCode(FuncIR funcIR) {
         funcIR.addInstructionAsm(new CommentAsm(this.toString()));
         Register reg = AsmBuilder.getRegister(funcIR ,reg2, isGlobal2, T0);
-        funcIR.addInstructionAsm(new MemoryAsm(LW, T0, reg, 0));
-        funcIR.addInstructionAsm(new MemoryAsm(SW, T0, SP, push(reg1, 4)));
+        if (regType2 == I8_PTR) {
+            funcIR.addInstructionAsm(new MemoryAsm(LB, T0, reg, 0));
+            funcIR.addInstructionAsm(new MemoryAsm(SB, T0, SP, push(reg1, 4)));
+        } else {
+            funcIR.addInstructionAsm(new MemoryAsm(LW, T0, reg, 0));
+            funcIR.addInstructionAsm(new MemoryAsm(SW, T0, SP, push(reg1, 4)));
+        }
     }
 
     @Override

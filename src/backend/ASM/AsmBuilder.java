@@ -8,6 +8,7 @@ import backend.LLVMIR.RegIR;
 
 import java.util.HashMap;
 
+import static backend.ASM.AsmOP.LB;
 import static backend.ASM.AsmOP.LW;
 import static backend.ASM.Register.SP;
 

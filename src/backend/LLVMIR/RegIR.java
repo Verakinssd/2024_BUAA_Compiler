@@ -22,12 +22,12 @@ public class RegIR {
         this.type = 2;
     }
 
-//    public RegIR(RegType regType, String reg,Boolean isGlobal) {
-//        this.regType = regType;
-//        this.reg = reg;
-//        this.type = 2;
-//        this.isGlobal = isGlobal;
-//    }
+    public RegIR(RegType regType, String reg,Boolean isGlobal) {
+        this.regType = regType;
+        this.reg = reg;
+        this.type = 2;
+        this.isGlobal = isGlobal;
+    }
 
     public RegIR(String specialReg) {
         this.specialReg = specialReg;

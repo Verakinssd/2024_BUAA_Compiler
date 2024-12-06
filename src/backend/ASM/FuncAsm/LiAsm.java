@@ -15,6 +15,6 @@ public class LiAsm extends InstructionAsm {
 
     @Override
     public String toString() {
-        return "    " + LI + " " + rs + ", " + num + "\n";
+        return "    " + LI + " " + rs + " " + num + "\n";
     }
 }

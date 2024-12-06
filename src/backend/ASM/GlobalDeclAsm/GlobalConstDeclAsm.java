@@ -19,11 +19,11 @@ public class GlobalConstDeclAsm extends GlobalDeclAsm{
         StringBuilder sb = new StringBuilder();
         sb.append("    ");
         if (regType == I32_PTR) {
-            sb.append(ident).append(":  .word ").append(value);
+            sb.append(ident.substring(1)).append(":  .word ").append(value);
         } else if (regType == I8_PTR) {
-            sb.append(ident).append(":  .byte ").append(value);
+            sb.append(ident.substring(1)).append(":  .byte ").append(value);
         } else if (regType == I32_PTR_PTR) {
-            sb.append(ident).append(":  .word ");
+            sb.append(ident.substring(1)).append(":  .word ");
             for (int i = 0;i < size;i ++) {
                 sb.append(values.get(i));
                 if (i < size - 1) {
@@ -31,7 +31,7 @@ public class GlobalConstDeclAsm extends GlobalDeclAsm{
                 }
             }
         } else if (regType == I8_PTR_PTR) {
-            sb.append(ident).append(":  .byte ");
+            sb.append(ident.substring(1)).append(":  .byte ");
             for (int i = 0;i < size;i ++) {
                 sb.append(values.get(i));
                 if (i < size - 1) {

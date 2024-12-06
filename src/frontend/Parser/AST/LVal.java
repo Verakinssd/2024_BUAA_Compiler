@@ -83,7 +83,7 @@ public class LVal extends AstNode{
                 reg = "%" + (FuncIR.reg - 1);
                 return new RegIR(getReference(regType), reg);
             } else {
-                return new RegIR(regType, reg);
+                return new RegIR(regType, reg, symbol.isGlobal);
             }
         } else {
             RegIR regIR;
@@ -100,16 +100,18 @@ public class LVal extends AstNode{
                 }
                 regIR.regType = I32;
             }
+            Boolean isGlobal = symbol.isGlobal;
             if (symbol.arraySize == null) {
                 funcIR.addInstructionIR(new LoadIR(getReference(regType), "%" + FuncIR.reg++, regType, reg, symbol.isGlobal));
                 reg = "%" + (FuncIR.reg - 1);
+                isGlobal = false;
             }
             if (regIR.type == 1) {
                 funcIR.addInstructionIR(new GetElementPtrIR("%" + (FuncIR.reg++),
-                        getReference(regType), symbol.arraySize, reg, regIR.value));
+                        getReference(regType), symbol.arraySize, reg, isGlobal, regIR.value));
             } else {
                 funcIR.addInstructionIR(new GetElementPtrIR("%" + (FuncIR.reg++),
-                        getReference(regType), symbol.arraySize, reg, regIR.reg));
+                        getReference(regType), symbol.arraySize, reg, isGlobal, regIR.reg , regIR.isGlobal));
             }
             if (!exps.isEmpty() && reload) {
                 funcIR.addInstructionIR(new LoadIR(getReference(getReference(regType)),

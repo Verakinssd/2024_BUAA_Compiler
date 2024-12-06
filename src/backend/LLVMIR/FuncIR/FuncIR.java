@@ -43,7 +43,6 @@ public class FuncIR {
     }
 
     public String getMipsCode() {
-        instructionAsms.add(new CommentAsm("    " + ident + ":\n"));
         instructionAsms.add(new LabelAsm(ident));
         AsmBuilder.pre(registerMap);
         for (FuncFParamIR p : params) {

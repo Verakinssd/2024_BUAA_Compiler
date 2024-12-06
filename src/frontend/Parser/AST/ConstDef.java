@@ -124,7 +124,7 @@ public class ConstDef extends AstNode {
             }
             for (int i = 0; i < values.size(); i++) {
                 funcIR.addInstructionIR(new GetElementPtrIR("%" + (FuncIR.reg ++),
-                        getReference(regType) , arraySize, symbol.reg, i));
+                        getReference(regType) , arraySize, symbol.reg , symbol.isGlobal, i));
                 RegIR regIR = new RegIR(getReference(getReference(regType)),values.get(i));
                 funcIR.addInstructionIR(new StoreIR( regIR
                         , "%" + (FuncIR.reg - 1), getReference(regType) , false));

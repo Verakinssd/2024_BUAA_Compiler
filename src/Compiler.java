@@ -46,12 +46,14 @@ public class Compiler {
             mips.append(globalDeclIR.getMipsCode());
         }
         mips.append("\n.text\n");
-        mips.append(".globl main\n\n");
+        mips.append("jal main\n");
+        mips.append("j exit\n\n");
         llvm_ir.append("\n");
         for (FuncIR funcIR : AstNode.funcIRs) {
             llvm_ir.append(funcIR.toString()).append("\n");
             mips.append(funcIR.getMipsCode());
         }
+        mips.append("\nexit:\n");
 
         Path llvm_ir_path = Paths.get("llvm_ir.txt");
         Files.writeString(llvm_ir_path, llvm_ir.toString());

@@ -10,10 +10,11 @@ import frontend.Lexer.TokenType;
 
 import java.util.Objects;
 
+import static backend.ASM.AsmOP.SB;
 import static backend.ASM.AsmOP.SW;
 import static backend.ASM.Register.T0;
 import static backend.ASM.Register.T1;
-import static backend.LLVMIR.RegType.getReference;
+import static backend.LLVMIR.RegType.*;
 
 public class StoreIR extends InstructionIR {
     public RegIR regIR1;
@@ -36,8 +37,12 @@ public class StoreIR extends InstructionIR {
         } else {
             operand1 = AsmBuilder.getRegister(funcIR, regIR1.reg, regIR1.isGlobal, T0);
         }
-        Register operand2 = AsmBuilder.getRegister(funcIR,reg2, isGlobal2, T1);
-        funcIR.addInstructionAsm(new MemoryAsm(SW, operand1, operand2, 0));
+        Register operand2 = AsmBuilder.getRegister(funcIR, reg2, isGlobal2, T1);
+        if (regType2 == I8_PTR) {
+            funcIR.addInstructionAsm(new MemoryAsm(SB, operand1, operand2, 0));
+        } else {
+            funcIR.addInstructionAsm(new MemoryAsm(SW, operand1, operand2, 0));
+        }
     }
 
     public String toString() {

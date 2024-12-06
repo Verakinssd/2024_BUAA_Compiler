@@ -1,6 +1,9 @@
 package backend.LLVMIR.FuncIR;
 
+import backend.ASM.FuncAsm.CommentAsm;
 import backend.LLVMIR.RegType;
+
+import static backend.ASM.AsmBuilder.offsetMap;
 
 public class ZextIR extends InstructionIR {
     String reg1;
@@ -13,6 +16,11 @@ public class ZextIR extends InstructionIR {
         this.regType1 = regType1;
         this.reg2 = reg2;
         this.regType2 = regType2;
+    }
+
+    public void generateMipsCode(FuncIR funcIR) {
+        funcIR.addInstructionAsm(new CommentAsm(this.toString()));
+        offsetMap.put(reg1,offsetMap.get(reg2));
     }
 
     public String toString() {

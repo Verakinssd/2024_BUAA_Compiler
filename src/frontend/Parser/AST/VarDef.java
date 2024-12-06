@@ -137,7 +137,7 @@ public class VarDef extends AstNode {
                     ArrayList<RegIR> regIRs = initVals.get(0).getVariableValue(funcIR);
                     for (int i = 0;i < regIRs.size();i++) {
                         funcIR.addInstructionIR(new GetElementPtrIR("%" + (FuncIR.reg ++),
-                                getReference(regType) , arraySize, symbol.reg,  i));
+                                getReference(regType) , arraySize, symbol.reg, symbol.isGlobal, i));
                         RegIR regIR1 = new RegIR(getReference(regType) ,"%" + (FuncIR.reg - 1));
                         RegIR regIR2 = regIRs.get(i);
                         if (regIR2.type == 2) {
@@ -159,7 +159,7 @@ public class VarDef extends AstNode {
                     String string = initVals.get(0).getString();
                     for (int i = 0;i < string.length();i++) {
                         funcIR.addInstructionIR(new GetElementPtrIR("%" + (FuncIR.reg ++),
-                                getReference(regType) , arraySize, symbol.reg, i));
+                                getReference(regType) , arraySize, symbol.reg, symbol.isGlobal, i));
                         RegIR regIR = new RegIR(getReference(getReference(regType)), (int) string.charAt(i));
                         funcIR.addInstructionIR(new StoreIR(regIR ,
                                  "%" + (FuncIR.reg - 1), getReference(regType) , false));
